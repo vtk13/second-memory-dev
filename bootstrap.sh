@@ -1,7 +1,8 @@
 #!/usr/bin/env bash
 
-apt-get update
-apt-get install -y mc apache2 postgresql php5 php5-pgsql nodejs nodejs-legacy npm composer
+apt-get -q update
+curl -sL https://deb.nodesource.com/setup_6.x | bash -
+apt-get -q install -y mc apache2 postgresql php5 php5-pgsql nodejs composer
 a2enmod rewrite
 unlink /etc/apache2/sites-enabled/000-default.conf
 
@@ -21,7 +22,6 @@ export BASIC_SERVER_PASSWORD=
 export API_HOST=localhost:8081
 
 cd /var/www/sm/
-npm install -g node-pre-gyp
 npm install
 rm -f public/client.js public/test.js public/vendor.js
 nodejs node_modules/webpack/bin/webpack.js
